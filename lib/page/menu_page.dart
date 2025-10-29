@@ -40,7 +40,6 @@ class _MenuPageState extends State<MenuPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ✅ Header
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               child: Row(
@@ -69,10 +68,7 @@ class _MenuPageState extends State<MenuPage> {
                 ],
               ),
             ),
-
             const SizedBox(height: 10),
-
-            // ✅ List Menu
             Expanded(
               child: menuList.isEmpty
                   ? const Center(
@@ -98,7 +94,6 @@ class _MenuPageState extends State<MenuPage> {
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
-                                // ✅ Card putih di kanan (sedikit bergeser)
                                 Container(
                                   height: 115,
                                   margin: const EdgeInsets.only(left: 50),
@@ -114,7 +109,7 @@ class _MenuPageState extends State<MenuPage> {
                                   ),
                                   child: Row(
                                     children: [
-                                      const SizedBox(width: 90), // ruang untuk gambar overlap
+                                      const SizedBox(width: 90),
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,8 +139,6 @@ class _MenuPageState extends State<MenuPage> {
                                     ],
                                   ),
                                 ),
-
-                                // ✅ Gambar kiri overlap
                                 Positioned(
                                   left: 0,
                                   top: 15,

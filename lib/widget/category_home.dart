@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class CategoryTabs extends StatelessWidget {
-  final List<dynamic> categories; // List of category data
-  final int selectedCategory; // index of selected category
-  final Function(int) onCategorySelected; // callback function
+  final List<dynamic> categories;
+  final int selectedCategory;
+  final Function(int) onCategorySelected;
 
   const CategoryTabs({
     super.key,

@@ -1,0 +1,70 @@
+{
+  "categories": [
+    { "id": 1, "name": "All" },
+    { "id": 2, "name": "Drink" },
+    { "id": 3, "name": "Dessert" },
+    { "id": 4, "name": "Snack" }
+  ],
+  "menu": [
+    {
+      "id": 101,
+      "name": "Creamy Matcha Cloud",
+      "category": "Drink",
+      "price": 610,
+      "currency": "¥",
+      "image": "assets/images/Creamy_Matcha_Cloud_satu.jpg",
+      "description": "Kesegaran matcha dalam bentuk paling lembut. Campuran matcha dingin dan susu segar menghasilkan gradasi warna hijau yang memikat. Dilengkapi dengan busa susu lembut di atasnya — sensasi creamy dan menyegarkan di setiap tegukan.",
+      "isFavorite": true
+    },
+    {
+      "id": 102,
+      "name": "Marble Matcha Cookies",
+      "category": "Snack",
+      "price": 360,
+      "currency": "¥",
+      "image": "assets/images/Marble_Matcha_Cookies_satu.jpg",
+      "description": "Kue butter berpola hijau-putih dengan aroma teh matcha yang halus. Teksturnya renyah di luar, lembut di dalam.",
+      "isFavorite": false
+    },
+    {
+      "id": 103,
+      "name": "Zen Matcha Mini Cake",
+      "category": "Dessert",
+      "price": 650,
+      "currency": "¥",
+      "image": "assets/images/Zen_Matcha_Mini_Cake_satu.jpg",
+      "description": "Kue mini lembut berwarna hijau alami dengan topping blueberry segar dan daun basil. Perpaduan rasa manis dan earthy yang menenangkan.",
+      "isFavorite": false
+    },
+    {
+      "id": 104,
+      "name": "Warm Hug Matcha Tea",
+      "category": "Drink",
+      "price": 580,
+      "currency": "¥",
+      "image": "assets/images/Warm_Hug_Matcha_Tea_satu.jpg",
+      "description": "Minuman matcha hangat dengan aroma khas teh hijau. Dihidangkan dalam cangkir keramik tradisional Jepang yang menenangkan hati.",
+      "isFavorite": false
+    },
+    {
+      "id": 105,
+      "name": "Matcha Strawberry Crêpe",
+      "category": "Dessert",
+      "price": 780,
+      "currency": "¥",
+      "image": "assets/images/Matcha_Strawberry_Crêpe_satu.jpg",
+      "description": "Lapisan crêpe tipis berkrim matcha dengan topping stroberi segar dan taburan gula halus yang menggoda.",
+      "isFavorite": true
+    },
+    {
+      "id": 106,
+      "name": "Matcha Mochi Delight",
+      "category": "Snack",
+      "price": 420,
+      "currency": "¥",
+      "image": "assets/images/Matcha_Mochi_Delight_satu.jpg",
+      "description": "Mochi lembut isi es krim matcha premium. Gigitan pertama langsung meleleh di mulut dengan rasa manis dan creamy.",
+      "isFavorite": true
+    }
+  ]
+}

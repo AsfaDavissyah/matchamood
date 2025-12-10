@@ -16,38 +16,38 @@ class CategoryTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 46,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
-        separatorBuilder: (context, _) => const SizedBox(width: 16),
+        separatorBuilder: (context, _) => const SizedBox(width: 12),
         itemBuilder: (context, index) {
           bool isSelected = selectedCategory == index;
+          final String name = categories[index]['name'] ?? 'Unknown';
 
           return GestureDetector(
             onTap: () => onCategorySelected(index),
             child: Container(
-              width: 80,
-              height: 50,
-              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               decoration: BoxDecoration(
-                color: isSelected ? AppColors.primary : AppColors.background,
-                borderRadius: BorderRadius.circular(15),
+                color: isSelected
+                    ? AppColors.primary
+                    : AppColors.background,
+                borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: isSelected ? AppColors.textPrimary : AppColors.textPrimary,
                   width: 2,
+                  color: AppColors.textPrimary,
                 ),
               ),
               child: Text(
-                categories[index]['name'] ?? 'Unknown',
+                name,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: isSelected
                       ? AppColors.textPrimary
                       : AppColors.textSecondary,
-                  fontWeight:
-                      isSelected ? FontWeight.w800 : FontWeight.w800,
-                  fontSize: 16,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),

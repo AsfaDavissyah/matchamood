@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../theme/app_theme.dart';
-import '../model/menu_model.dart';
+import '../model/meal.dart';
+import '../services/meal_service.dart';
 import 'detail_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -13,23 +12,27 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  List<MenuItem> menuList = [];
+  List<Meal> allMeals = [];
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    loadMenuData();
+    loadMeals();
   }
 
-  Future<void> loadMenuData() async {
-    final String response = await rootBundle.loadString('assets/menu_data.json');
-    final data = json.decode(response);
+  Future<void> loadMeals() async {
+    try {
+      final meals = await MealService.fetchAllMeals();
 
-    setState(() {
-      menuList = (data['menu'] as List)
-          .map((json) => MenuItem.fromJson(json))
-          .toList();
-    });
+      setState(() {
+        allMeals = meals;
+        isLoading = false;
+      });
+    } catch (e) {
+      print("Error MenuPage load: $e");
+      setState(() => isLoading = false);
+    }
   }
 
   @override
@@ -38,8 +41,8 @@ class _MenuPageState extends State<MenuPage> {
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Header
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               child: Row(
@@ -58,7 +61,7 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                   const Text(
-                    'Our Menu',
+                    'All Menu',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
@@ -68,35 +71,37 @@ class _MenuPageState extends State<MenuPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+
+            // LIST VIEW
             Expanded(
-              child: menuList.isEmpty
+              child: isLoading
                   ? const Center(
                       child: CircularProgressIndicator(color: AppColors.primary),
                     )
                   : ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: menuList.length,
+                      itemCount: allMeals.length,
                       itemBuilder: (context, index) {
-                        final item = menuList[index];
+                        final meal = allMeals[index];
 
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => ProductDetailPage(item: item),
+                                builder: (_) => ProductDetailPage(meal: meal),
                               ),
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
+                            padding: const EdgeInsets.only(bottom: 20),
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
+                                // Card
                                 Container(
                                   height: 115,
-                                  margin: const EdgeInsets.only(left: 50),
+                                  margin: const EdgeInsets.only(left: 60),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 14),
                                   decoration: BoxDecoration(
@@ -113,22 +118,23 @@ class _MenuPageState extends State<MenuPage> {
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              item.name,
+                                              meal.name,
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
-                                                fontSize: 24,
+                                                fontSize: 22,
                                                 fontWeight: FontWeight.w700,
                                                 color: AppColors.textPrimary,
                                               ),
                                             ),
                                             const SizedBox(height: 6),
                                             Text(
-                                              "${item.currency}${item.price}",
+                                              meal.category ?? '',
                                               style: const TextStyle(
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.bold,
                                                 color: AppColors.textPrimary,
                                               ),
@@ -139,12 +145,14 @@ class _MenuPageState extends State<MenuPage> {
                                     ],
                                   ),
                                 ),
+
+                                // Image
                                 Positioned(
                                   left: 0,
-                                  top: 15,
+                                  top: 7,
                                   child: Container(
-                                    width: 144,
-                                    height: 85,
+                                    width: 150,
+                                    height: 100,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
@@ -155,8 +163,8 @@ class _MenuPageState extends State<MenuPage> {
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: Image.asset(
-                                        item.image,
+                                      child: Image.network(
+                                        meal.thumbnail,
                                         fit: BoxFit.cover,
                                       ),
                                     ),

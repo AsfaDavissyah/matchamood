@@ -105,7 +105,7 @@ App ini menggunakan API open-source dari **TheMealDB**:
 
 ### 1️⃣ Clone the project
 ```sh
-git clone https://github.com/yourusername/matcha-mood.git
+git clone https://github.com/AsfaDavissyah/matchamood.git
 
 
 By: Asfa Davissyah 230605110186
